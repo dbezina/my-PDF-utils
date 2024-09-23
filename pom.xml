@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.bezina</groupId>
+    <artifactId>my-PDF-utils</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <onejar-maven-plugin.version>1.4.4</onejar-maven-plugin.version>
+<!--        <spring-boot-maven-plugin.version>2.0.3.RELEASE</spring-boot-maven-plugin.version>-->
+        <mainClass>com.bezina.PDFUtilsApp</mainClass>
+    </properties>
+
+<dependencies>
+    <!-- Apache PDFBox Dependency -->
+    <dependency>
+        <groupId>org.apache.pdfbox</groupId>
+        <artifactId>pdfbox</artifactId>
+        <version>2.0.24</version>
+    </dependency>
+
+    <!-- JavaFX dependencies -->
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-controls</artifactId>
+        <version>17.0.1</version>
+        <classifier>win</classifier> <!-- win, linux или mac в зависимости от ОС -->
+    </dependency>
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-graphics</artifactId>
+        <version>17.0.1</version>
+    </dependency>
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-base</artifactId>
+        <version>17.0.1</version>
+    </dependency>
+</dependencies>
+
+<build>
+    <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+        </resource>
+    </resources>
+
+    <plugins>
+        <plugin>
+            <groupId>com.jolira</groupId>
+            <artifactId>onejar-maven-plugin</artifactId>
+            <version>${onejar-maven-plugin.version}</version>
+            <executions>
+                <execution>
+                    <configuration>
+                        <mainClass>${mainClass}</mainClass>
+                        <attachToBuild>true</attachToBuild>
+                        <filename>${project.build.finalName}-onejar.${project.packaging}</filename>
+                    </configuration>
+                    <goals>
+                        <goal>one-jar</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+
+</project>
